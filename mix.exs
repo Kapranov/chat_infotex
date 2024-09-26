@@ -20,8 +20,11 @@ defmodule Chat.MixProject do
 
   defp deps do
     [
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.34", runtime: false},
       {:n2o, "~> 11.9"},
-      {:nitro, "~> 9.9"}
+      {:nitro, "~> 9.9"},
+      {:plug_cowboy, "~> 2.7"}
     ]
   end
 end
