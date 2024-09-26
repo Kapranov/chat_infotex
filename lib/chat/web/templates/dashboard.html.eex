@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dashboard</title>
+  </head>
+  <body>
+    <main id="main"></main>
+    <h1>Room #<%= room%></h1>
+    <br>
+    <form>
+      <input id="message" type="text">
+      <br>
+      <br>
+      <input type="submit" value="send" id="button">
+    </form>
+  </body>
+</html>
+

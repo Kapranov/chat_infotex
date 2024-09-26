@@ -4,6 +4,9 @@
     <title>index</title>
   </head>
   <body>
-    <h1>Chats</h1>
+    <h1>Chat</h1>
+    <a href="/room1"><button>Room #1</button></a>
+    <a href="/room2"><button>Room #2</button></a>
+    <a href="/room3"><button>Room #3</button></a>
   </body>
 </html>

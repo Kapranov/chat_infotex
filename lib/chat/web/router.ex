@@ -16,6 +16,22 @@ defmodule Chat.Web.Router do
     render(conn, "index.html")
   end
 
+  get "/room1" do
+    render(conn, "dashboard.html", room: 1)
+  end
+
+  get "/room2" do
+    render(conn, "dashboard.html", room: 2)
+  end
+
+  get "/room3" do
+    render(conn, "dashboard.html", room: 3)
+  end
+
+  match _ do
+    send_resp(conn, 404, "Oops")
+  end
+
   @spec render(%{status: integer()}, String.t(), list()) :: Plug.Cowboy.Conn.t
   defp render(%{status: status} = conn, template, assigns \\ []) do
     body =

@@ -1,26 +1,33 @@
 defmodule Chat.Application do
   @moduledoc false
 
-  use Application
+  use Supervisor
 
   @doc """
   Starts the endpoint supervision tree.
   """
-  @impl true
-  @spec start(Application.start_type(), start_args :: term()) ::
-          {:ok, pid()} | {:ok, pid(), Application.state()} | {:error, reason :: term()}
-  def start(_type, _args) do
-    children = [
-      Plug.Cowboy.child_spec(scheme: :http, plug: Chat.Web.Router, options: [port: port()])
-    ]
-    opts = [strategy: :one_for_one, name: Chat.Supervisor]
-    Supervisor.start_link(children, opts)
-  end
 
-  @spec port() :: integer
-  defp port() do
-    System.get_env()
-    |> Map.get("PORT", "4000")
-    |> String.to_integer()
+  @type name :: atom | {:global, term} | {:via, module, term}
+  @type option :: {:name, name}
+  @type strategy :: :one_for_one | :one_for_all | :rest_for_one
+  @type init_option ::
+          {:strategy, strategy}
+          | {:max_restarts, non_neg_integer}
+          | {:max_seconds, pos_integer}
+
+
+  @options [port: 4000]
+  @name __MODULE__
+
+  @spec start_link([option | init_option]) ::
+          {:ok, pid} | {:error, {:already_started, pid} | {:shutdown, term} | term}
+  def start_link(opts), do: Supervisor.start_link(@name, :ok, opts)
+
+  @spec init(atom) :: {:ok, tuple}
+  def init(:ok) do
+    children = [
+      Plug.Cowboy.child_spec(scheme: :http, plug: Chat.Web.Router, options: @options)
+    ]
+    Supervisor.init(children, strategy: :one_for_one)
   end
 end
