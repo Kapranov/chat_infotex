@@ -19,6 +19,9 @@ defmodule Chat.MixProject do
   end
 
   defp deps do
-    []
+    [
+      {:n2o, "~> 11.9"},
+      {:nitro, "~> 9.9"}
+    ]
   end
 end

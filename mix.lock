@@ -1,0 +1,4 @@
+%{
+  "n2o": {:hex, :n2o, "11.9.6", "370ee71e8b842160e32db355ae71a96d77b6f101985492b14fcb4121aef5f812", [:mix, :rebar3], [], "hexpm", "9344306a64f357c6ed92e537e87f7fb1c9e5314d2b81e83532bdcaa50956fd0e"},
+  "nitro": {:hex, :nitro, "9.9.6", "02361c9967b8220a2e971035bb718ad495df16219dcdc02f4ad36c09d59c34bc", [:mix, :rebar3], [], "hexpm", "5f88749ebe0c28db30727b30c5cdc850373f0cdee86ef8f0b7ef590a06cdcda1"},
+}
