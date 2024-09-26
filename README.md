@@ -20,6 +20,8 @@
 
 При виникненні питань, можна звертатись до [Івана][4] або [Вікторії][5]
 
+### 26 September 2024 by Oleg G.Kapranov
+
 [1]: https://github.com/synrc/n2o
 [2]: https://github.com/synrc/nitro
 [3]: https://github.com/synrc/sample
