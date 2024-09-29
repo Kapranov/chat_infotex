@@ -20,6 +20,16 @@
 
 При виникненні питань, можна звертатись до [Івана][4] або [Вікторії][5]
 
+````
+bash> websocat ws://127.0.0.1:4000/ws
+PING
+Aloha!
+proba
+PONG
+XXX
+XXX
+````
+
 ### 26 September 2024 by Oleg G.Kapranov
 
 [1]: https://github.com/synrc/n2o

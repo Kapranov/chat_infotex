@@ -1,33 +1,23 @@
 defmodule Chat.Application do
   @moduledoc false
 
-  use Supervisor
+  require N2O
+  use Application
 
-  @doc """
-  Starts the endpoint supervision tree.
-  """
+  alias Chat.Web.Router
 
-  @type name :: atom | {:global, term} | {:via, module, term}
-  @type option :: {:name, name}
-  @type strategy :: :one_for_one | :one_for_all | :rest_for_one
-  @type init_option ::
-          {:strategy, strategy}
-          | {:max_restarts, non_neg_integer}
-          | {:max_seconds, pos_integer}
+  @options [port: 4_000]
 
+  def init(state, args), do: {:ok, state, args}
 
-  @options [port: 4000]
-  @name __MODULE__
-
-  @spec start_link([option | init_option]) ::
-          {:ok, pid} | {:error, {:already_started, pid} | {:shutdown, term} | term}
-  def start_link(opts), do: Supervisor.start_link(@name, :ok, opts)
-
-  @spec init(atom) :: {:ok, tuple}
-  def init(:ok) do
+  def start(_, _) do
     children = [
-      Plug.Cowboy.child_spec(scheme: :http, plug: Chat.Web.Router, options: @options)
+      Plug.Cowboy.child_spec(
+        scheme: :http,
+        plug: Router,
+        options: @options
+      )
     ]
-    Supervisor.init(children, strategy: :one_for_one)
+    Supervisor.start_link(children, strategy: :one_for_one, name: Chat.Supervisor)
   end
 end

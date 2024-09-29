@@ -3,18 +3,18 @@ defmodule Chat.Web.Router do
 
   use Plug.Router
 
+  alias Chat.Web.{Router, Socket}
+
   @template "lib/chat/web/templates"
+
+  plug :match
+  plug :dispatch
 
   plug Plug.Parsers,
     parsers: [:urlencoded],
     pass: ["text/*"]
 
-  plug :match
-  plug :dispatch
-
-  get "/" do
-    render(conn, "index.html")
-  end
+  get "/", do: render(conn, "index.html")
 
   get "/room1" do
     render(conn, "dashboard.html", room: 1)
@@ -26,6 +26,16 @@ defmodule Chat.Web.Router do
 
   get "/room3" do
     render(conn, "dashboard.html", room: 3)
+  end
+
+  get "/ws" do
+    conn
+    |> WebSockAdapter.upgrade(
+      Socket,
+      [module: Router],
+      timeout: 60_000
+    )
+    |> halt()
   end
 
   match _ do
