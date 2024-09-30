@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type=image/x-icon href=https://n2o.dev/img/favicon.ico />
+    <script type="text/javascript">
+      function connectToWS() {
+        const ws = new WebSocket('ws://127.0.0.1:4000/ws', null, {
+          headers: {
+            ['Connection']: 'Upgrade',
+          }
+        });
+
+        ws.onopen = function(evt) {
+          console.log("onopen.");
+        };
+      }
+
+      function sendMsg() {
+        var message = document.getElementById("myMessage").value;
+        ws.send(message);
+      }
+    </script>
     <title>dashboard</title>
   </head>
   <body>
-    <main id="main"></main>
     <h1>Room #<%= room%></h1>
     <br>
+    <br>
     <form>
-      <input id="message" type="text">
-      <br>
-      <br>
-      <input type="submit" value="send" id="button">
+      message: <input type="text" id="myMessage" name="myMessage" value="PING"><br>
     </form>
+    <br>
+    <input type="button" onclick="connectToWS()" value="connect to WebSocket endpoint" /><br><br>
+    <input type="button" onclick="sendMsg()" value="Send message" />
+    <br>
   </body>
 </html>
-

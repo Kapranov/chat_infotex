@@ -30,6 +30,14 @@ XXX
 XXX
 ````
 
+```javascript
+const ws = new WebSocket(WEB_SOCKETS_URL, null, {
+  headers: {
+    ['Connection']: 'Upgrade'
+  }
+}
+```
+
 ### 26 September 2024 by Oleg G.Kapranov
 
 [1]: https://github.com/synrc/n2o
